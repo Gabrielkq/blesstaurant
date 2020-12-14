@@ -10,9 +10,17 @@ class NavBar extends Component {
             <div>
             
                 <NavLink to="/Home">Home</NavLink>
+             
+                {this.props.user_id 
+                ?   
+                 <button onClick={this.props.logout} >logout {this.props.username}</button>
+                :
+                <>
                 <NavLink to="/Login">Login</NavLink>
                 <NavLink to="/Signup">Sign up</NavLink>
-                <Search />
+                </>
+                }
+                <Search history={this.props.history}/>
 
             </div>
         );

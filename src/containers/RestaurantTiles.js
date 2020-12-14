@@ -4,19 +4,17 @@ import { connect } from 'react-redux';
 
 class RestaurantTiles extends Component {
 
-    // renderYelpResults = () =>{
-    //     this.props.restaurants.restaurants.map(r =>{
-    //         return (<li>{r.name}</li>)
-    //     })
-    // }
-
     render() {
-        console.log("in tiles: ", this.props.restaurants.restaurants)
         return (
             <div>
                 here are the restaurants from yelp 
                <ul>
-               {this.props.restaurants.map(r => <Link to={`/restaurants/${r.id}`}> <li>{r.name}</li></Link>)
+               {this.props.restaurants.map(r => console.log("in map:", r) || 
+               r.none
+               ? 
+                <h3>No Results Found, Try Another Search</h3>
+               :
+               <><Link to={`/restaurants/${r.id}`}> <li>{r.name}</li></Link></>)
                }
                 </ul>
                 </div>

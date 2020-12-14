@@ -4,9 +4,7 @@ import { getYelpResults } from './redux/actionCreators';
 class Search extends Component {
 
     state = {
-        searchTerm: "",
-        restArr: []
-
+        searchTerm: ""
     }
     
     sortRest = () => {
@@ -19,16 +17,17 @@ class Search extends Component {
         })
     }
 
-    searchy = (e) => {
+    searchYelpForRestaurants = (e) => {
         e.preventDefault()
         this.props.getYelpResults(this.state.searchTerm)
+        this.props.history.push("/restaurants")
     }
 
     render() {
-        console.log("search bar: ", this.props)
+        console.log("in search:", this.props)
         return (
             <div>
-                <form onSubmit={this.searchy}>
+                <form onSubmit={this.searchYelpForRestaurants}>
                 <label>Search</label>
                 <input type="text" name="searchTerm" onChange={this.onChange} value={this.state.searchTerm} />
                 <br>
@@ -37,19 +36,6 @@ class Search extends Component {
                 </form>
              <br>
              </br>
-             {/* <Switch>             <ul>
-        {this.sortRest().map(r => (<li style={{ listStyleType: "none" }}>
-            <Route path={`restaurants/${r.id}`} key={r.id} render={() => <RestaurantTile/>} />
-
-            
-            
-            <Link to={`/restaurants/${r.id}`}
-            >{r.name} </Link>
-            distance: {r.distance * 0.000189394} miles
-        
-            </li>))}
-             </ul>
-             </Switch> */}
 
             </div>
         );
