@@ -7,16 +7,19 @@ class RestaurantTiles extends Component {
     render() {
         return (
             <div>
-                here are the restaurants from yelp 
-               <ul>
-               {this.props.restaurants.map(r => console.log("in map:", r) || 
-               r.none
+               {this.props.restaurants.map(restaurant => (
+               restaurant.none
                ? 
                 <h3>No Results Found, Try Another Search</h3>
                :
-               <><Link to={`/restaurants/${r.id}`}> <li>{r.name}</li></Link></>)
-               }
-                </ul>
+               <>
+                    <div>
+                        <Link to={`/restaurants/${restaurant.id}`}> <p>{restaurant.name}</p></Link>
+                        <img src={restaurant.image_url} alt={restaurant.name}/>
+                    </div>
+                </>)
+                )
+                }
                 </div>
         );
     }

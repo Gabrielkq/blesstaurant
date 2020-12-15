@@ -25,7 +25,7 @@ export const getYelpRestaurant = (id) =>{
             } else {
              dispatch({type: 'SET_YELP', payload: obj})   
             }}
-            )
+        )
     }
 }
     
@@ -46,3 +46,35 @@ export const findBackEndRestaurant = (yelpId) =>{
 }
 
 export const clearYelp = () =>({ type: 'CLEAR_YELP' })
+
+export const toggleModal = () => ({ type: 'TOGGLE_MODAL'})
+
+export const autoLogin = (token) => {
+    return dispatch => {
+        fetch("http://localhost:3000/auto_login", {
+          headers: {
+            "Authorization": token
+          }
+        })
+        .then(r => r.json())
+        .then(res => { 
+          if (res.errors){
+            console.log(res.errors)
+          } else {
+            dispatch({ type: 'AUTO_LOGIN', payload: res}) 
+          }
+        })
+    }
+} 
+
+export const setToken = data => {
+    localStorage.token = data.token
+    return dispatch => {
+    fetch(`http://localhost:3000/users/${data.user_id}`)
+      .then(r => r.json())
+      .then(dispatch({ type: 'SET_TOKEN', payload: data})
+      )
+    }
+  }
+
+  export const logout = () => ({ type: 'LOGOUT' })

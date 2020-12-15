@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { setToken } from '../redux/actionCreators'
 
 class Login extends Component {
 
@@ -33,6 +35,11 @@ class Login extends Component {
                  alert(response.errors)
              } else {
               this.props.setToken(response)
+              this.props.history.push("/")
+              this.setState({
+                username: "",
+                password: ""    
+              })
              }
          })
        
@@ -58,4 +65,4 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default connect(null, {setToken})(Login);

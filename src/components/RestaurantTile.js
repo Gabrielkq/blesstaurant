@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getYelpRestaurant, findBackEndRestaurant, clearYelp } from '../redux/actionCreators';
+import ReviewModalForm from './ReviewModalForm';
+import { getYelpRestaurant, findBackEndRestaurant, clearYelp, toggleModal } from '../redux/actionCreators';
 
 class RestaurantTile extends Component {
-
-
 
     componentDidMount(){
         this.props.getYelpRestaurant(this.props.match.params.id)
@@ -15,31 +14,31 @@ class RestaurantTile extends Component {
         this.props.clearYelp()
     }
 
-    existingRestaurant = () => {
-        fetch('http://localhost:3000/existing_restaurant', {
-            headers: {
-              'Yelp-Id': `${this.props.yelpRestaurant.id}`
-                }
-            })
-          .then(r => r.json())
-          .then(obj => alert(obj.restaurant_id))
-    }
-
     render() {
         console.log("tile props", this.props)
+        const { redirect, history, toggleModal } = this.props
+        const { name, location, image_url, photos } = this.props.yelpRestaurant
         return (
             <div>
-                 {this.props.redirect
-                 ? <div><p>404 not found</p></div> 
-                :<>
-                <h1>{this.props.yelpRestaurant.name}</h1>
-                <button onClick={() => this.props.history.push("/restaurants")}>go back to search results</button>
-                 {this.props.yelpRestaurant.location.display_address &&  <p>{ this.props.yelpRestaurant.location.display_address[0]} { this.props.yelpRestaurant.location.display_address[1]}</p>    }
-                <button onClick={this.existingRestaurant}>is this in the backend?</button>
-
-                <img src={this.props.yelpRestaurant.image_url} alt={this.props.yelpRestaurant.name}/>
-                </>}
-                 </div>
+                <ReviewModalForm/>
+                {redirect
+                 ?  
+                    <div><p>404 not found</p></div> 
+                 :
+                <>
+                     <h1>{name}</h1>
+                     <button onClick={() => history.push("/restaurants")}>go back to search results</button>
+                     <button onClick={toggleModal}>add a review</button>
+                    {location.display_address &&
+                        <p>{ location.display_address[0]}, { location.display_address[1]} { location.display_address[2]} </p>    
+                    }
+                    <p></p>
+                    <img src={image_url} alt={name}/>
+                    <img src={photos[1]} alt={name}/>
+                    <img src={photos[2]} alt={name}/>
+                </>
+                 }
+            </div>
         );
     }
 }
@@ -47,9 +46,9 @@ class RestaurantTile extends Component {
 const msp = state =>({
     yelpRestaurant: state.restaurants.yelpRestaurant,
     redirect: state.restaurants.redirect,
-    inBackEnd: state.restaurants.inBackEnd,
-    backEndId: state.restaurants.backEndId
+    restaurantInBackEnd: state.restaurants.restaurantInBackEnd,
+    restaurantId: state.restaurants.restaurantId
 })
 
 
-export default connect(msp, { getYelpRestaurant, findBackEndRestaurant, clearYelp } )(RestaurantTile);
+export default connect(msp, { getYelpRestaurant, findBackEndRestaurant, clearYelp, toggleModal } )(RestaurantTile);
