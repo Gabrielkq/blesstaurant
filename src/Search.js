@@ -24,7 +24,6 @@ class Search extends Component {
     }
 
     render() {
-        console.log("in search:", this.props)
         return (
             <div>
                 <form onSubmit={this.searchYelpForRestaurants}>
