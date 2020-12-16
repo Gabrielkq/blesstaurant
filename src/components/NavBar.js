@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import Search from '../Search';
+import Search from './Search';
 import { connect } from 'react-redux';
 import { logout } from '../redux/actionCreators'
 

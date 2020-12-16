@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReviewModalForm from './ReviewModalForm';
-import { getYelpRestaurant, findBackEndRestaurant, clearYelp, toggleModal } from '../redux/actionCreators';
+import ReviewContiner from '../containers/ReviewContainer';
+import { getYelpRestaurant, findBackEndRestaurant, clearRestaurantPage, toggleModal } from '../redux/actionCreators';
 
-class RestaurantTile extends Component {
+class RestaurantPage extends Component {
 
     componentDidMount(){
         this.props.getYelpRestaurant(this.props.match.params.id)
@@ -11,7 +12,7 @@ class RestaurantTile extends Component {
     }
 
     componentWillUnmount(){
-        this.props.clearYelp()
+        this.props.clearRestaurantPage()
     }
 
     render() {
@@ -21,6 +22,7 @@ class RestaurantTile extends Component {
         return (
             <div>
                 <ReviewModalForm/>
+                <div id="leftside">
                 {redirect
                  ?  
                     <div><p>404 not found</p></div> 
@@ -33,11 +35,19 @@ class RestaurantTile extends Component {
                         <p>{ location.display_address[0]}, { location.display_address[1]} { location.display_address[2]} </p>    
                     }
                     <p></p>
-                    <img src={image_url} alt={name}/>
-                    <img src={photos[1]} alt={name}/>
-                    <img src={photos[2]} alt={name}/>
+                    <iframe title="map" width="600" height="450" 
+                    frameborder="0" style={{border:0}}
+                    src={`https://www.google.com/maps/embed/v1/search?q=${name},${location.display_address && location.display_address[0]},${location.display_address && location.display_address[1] }.&key=${process.env.REACT_APP_API_KEY}`} 
+                    allowfullscreen></iframe>
+                    <img src={image_url} alt={name} width="500" />
+               
                 </>
                  }
+                </div>
+                <div id="rightside">
+                    <ReviewContiner/>
+                </div>
+
             </div>
         );
     }
@@ -51,4 +61,4 @@ const msp = state =>({
 })
 
 
-export default connect(msp, { getYelpRestaurant, findBackEndRestaurant, clearYelp, toggleModal } )(RestaurantTile);
+export default connect(msp, { getYelpRestaurant, findBackEndRestaurant, clearRestaurantPage, toggleModal } )(RestaurantPage);

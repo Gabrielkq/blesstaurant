@@ -7,7 +7,7 @@ import { Component } from 'react';
 import Home from './components/Home';
 import NavBar from './components/NavBar';
 import RestaurantTiles from './containers/RestaurantTiles';
-import RestaurantTile from './components/RestaurantTile';
+import RestaurantPage from './components/RestaurantPage';
 import {autoLogin} from './redux/actionCreators';
 import { connect } from 'react-redux';
 
@@ -28,7 +28,7 @@ class App extends Component {
              <Switch>
                <Route path="/login" render={() => <Login history={this.props.history} />} />
                <Route path="/signup" render={() => <Signup history={this.props.history} />} />
-               <Route path="/restaurants/:id" render={({ match }) => <RestaurantTile match={match} history={this.props.history}/>}/> 
+               <Route path="/restaurants/:id" render={({ match }) => <RestaurantPage match={match} history={this.props.history}/>}/> 
                <Route exact path="/restaurants" render={() => <RestaurantTiles/>} />
                <Route exact path="/" render={() => <Home />}/>
              </Switch>

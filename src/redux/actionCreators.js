@@ -40,12 +40,19 @@ export const findBackEndRestaurant = (yelpId) =>{
             .then(obj => {
                 if (obj.restaurant_id){
                     dispatch({type: 'SET_BACKEND', payload: obj.restaurant_id})
+                    fetch('http://localhost:3000/restaurant_reviews', {
+                      headers: {'Rest-Id': `${obj.restaurant_id}`}
+                     })
+                    .then(r => r.json())
+                    .then(resp => {
+                        dispatch({type: 'GET_REVIEWS', payload: resp})
+                    })
                 }
             })
     }
 }
 
-export const clearYelp = () =>({ type: 'CLEAR_YELP' })
+export const clearRestaurantPage = () =>({ type: 'CLEAR_RESTAURANT_PAGE' })
 
 export const toggleModal = () => ({ type: 'TOGGLE_MODAL'})
 
@@ -77,4 +84,4 @@ export const setToken = data => {
     }
   }
 
-  export const logout = () => ({ type: 'LOGOUT' })
+export const logout = () => ({ type: 'LOGOUT' })

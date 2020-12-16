@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { toggleModal } from '../redux/actionCreators'
+import { toggleModal } from '../redux/actionCreators';
+import { Link } from 'react-router-dom';
 
 class ReviewModalForm extends Component {
 
@@ -12,7 +13,7 @@ class ReviewModalForm extends Component {
 
     addReviewOnly = () => {
         fetch('http://localhost:3000/reviews', {
-  method: 'POST', // or 'PUT'
+  method: 'POST',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -46,7 +47,7 @@ class ReviewModalForm extends Component {
                     <span className="close" onClick={toggleModal}>&times;</span>
                     {!userId 
                     ?
-                    <p>Sign up or Login to review this restaurant</p>
+                    <p><Link to="/signup">Sign up</Link> or <Link to="/login">Login</Link> to review this restaurant</p>
                     :
                         !restaurantId
                             ? 
@@ -60,7 +61,7 @@ class ReviewModalForm extends Component {
                         <p>create rest and review</p>
                             :
                             <>
-                            <p>restaurant already created, review form</p>
+                            {/* <p>restaurant already created, review form</p> */}
                                    <form onSubmit={this.addReviewOnly}>
                             <label>
                               Review:

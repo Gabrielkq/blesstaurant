@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getYelpResults } from './redux/actionCreators';
+import { getYelpResults } from '../redux/actionCreators';
 class Search extends Component {
 
     state = {
         searchTerm: ""
     }
     
-    sortRest = () => {
-       return this.state.restArr.sort((a, b) => a.distance - b.distance)
-    }
-
     onChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
@@ -20,6 +16,7 @@ class Search extends Component {
     searchYelpForRestaurants = (e) => {
         e.preventDefault()
         this.props.getYelpResults(this.state.searchTerm)
+        this.setState({searchTerm: ""})
         this.props.history.push("/restaurants")
     }
 
