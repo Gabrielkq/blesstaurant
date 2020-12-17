@@ -1,36 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { toggleModal } from '../redux/actionCreators';
+import { toggleModal, addReviewOnly, addRestaurantandReview } from '../redux/actionCreators';
 import { Link } from 'react-router-dom';
 
 class ReviewModalForm extends Component {
 
     state = {
         content: "",
-        rating: null,
-        review: {}
+        rating: 5,
     }
 
-    addReviewOnly = () => {
-        fetch('http://localhost:3000/reviews', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-      content: this.state.content,
-      rating: this.state.rating,
-      user_id: this.props.userId,
-      restaurant_id: this.props.restaurantId
-  }),
-})
-.then(response => response.json())
-.then(data => {
-  this.setState({
-      review: data
-  }, () => this.props.toggleModal())
-})
-    }
 
     handleChange = (e) => {
         this.setState({
@@ -39,7 +18,7 @@ class ReviewModalForm extends Component {
     }
 
     render() {
-        const { displayModal, toggleModal, userId, restaurantId } = this.props
+        const { displayModal, toggleModal, userId, restaurantId, addReviewOnly, addRestaurantandReview, yelpId, name } = this.props
         const display = displayModal ? "block" : "none"
         return (
             <div id="myModal" className="modal" style={{display}}>
@@ -49,23 +28,11 @@ class ReviewModalForm extends Component {
                     ?
                     <p><Link to="/signup">Sign up</Link> or <Link to="/login">Login</Link> to review this restaurant</p>
                     :
-                        !restaurantId
-                            ? 
-                        //     <form onSubmit={this.handleSubmit}>
-                        //     <label>
-                        //       Essay:
-                        //       <textarea value={this.state.value} onChange={this.handleChange} />
-                        //     </label>
-                        //     <input type="submit" value="Submit" />
-                        //   </form>
-                        <p>create rest and review</p>
-                            :
-                            <>
-                            {/* <p>restaurant already created, review form</p> */}
-                                   <form onSubmit={this.addReviewOnly}>
+                            <form 
+                                onSubmit={(e) => !restaurantId ? addRestaurantandReview(e, name, yelpId, this.state.content, this.state.rating, userId) : addReviewOnly(e, this.state.content, this.state.rating, userId, restaurantId) }>
                             <label>
                               Review:
-                              <textarea name="content" value={this.state.content} onChange={this.handleChange} />
+                              <textarea placeholder="add review here" name="content" value={this.state.content} onChange={this.handleChange} />
                             </label>
                             <br/>   
                             <label>
@@ -74,7 +41,7 @@ class ReviewModalForm extends Component {
                               </label>
                             <input type="submit" value="Submit" />
                           </form>
-                          </>
+                          
                     }
                 </div>
             </div>    
@@ -85,7 +52,9 @@ class ReviewModalForm extends Component {
 const msp = state => ({
     displayModal: state.restaurants.displayModal,
     userId: state.user.userId,
-    restaurantId: state.restaurants.restaurantId
+    restaurantId: state.restaurants.restaurantId,
+    yelpId: state.restaurants.yelpRestaurant.id,
+    name: state.restaurants.yelpRestaurant.name
 })
 
-export default connect(msp, { toggleModal })(ReviewModalForm);
+export default connect(msp, { toggleModal, addReviewOnly, addRestaurantandReview })(ReviewModalForm);

@@ -21,7 +21,6 @@ class App extends Component {
   }
 
   render(){
-   console.log("in app:", this.props)
     return (
       <div className="App">
           <NavBar history={this.props.history} />

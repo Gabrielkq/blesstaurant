@@ -17,7 +17,7 @@ const restaurantsReducer = (state=initialState, action) => {
             return {...state, yelpResults: action.payload.restaurants} 
         case 'SET_YELP':
             return {...state, yelpRestaurant: action.payload.yelp_restaurant}
-        case 'CLEAR_YELP':
+        case 'CLEAR_RESTAURANT_PAGE':
             return {...state, yelpRestaurant: blankYelp, restaurantInBackEnd: false, restaurantId: null}
         case 'REDIRECT_404':
             return {...state, redirect: true}

@@ -85,3 +85,84 @@ export const setToken = data => {
   }
 
 export const logout = () => ({ type: 'LOGOUT' })
+
+export const addReviewOnly = (e, content, rating, user_id, restaurant_id) =>{
+    e.preventDefault()
+    return dispatch => {
+        fetch('http://localhost:3000/reviews',{
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              },
+             body: JSON.stringify({
+                content,
+                rating,
+                user_id,
+                restaurant_id 
+             }),
+        })
+        .then(r => r.json())
+        .then(res => { 
+            if (res.errors){
+              alert(res.errors)
+            } else {
+              dispatch({ type: 'ADD_REVIEW', payload: res})
+              dispatch({ type: 'TOGGLE_MODAL'}) 
+            }
+        })
+    }
+}
+
+export const deleteReview = (id) =>{
+    return dispatch => {
+        fetch(`http://localhost:3000/reviews/${id}`,{
+            method: 'DELETE'
+        })
+        .then(dispatch({ type: 'DELETE_REVIEW', payload: id}))
+    }
+}
+
+export const addRestaurantandReview = (e, name, yelp_id, content, rating, user_id) =>{
+    e.preventDefault()
+    return dispatch => {
+        fetch('http://localhost:3000/restaurants',{
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              },
+            body: JSON.stringify({
+               name,
+               yelp_id
+             })
+        })
+        .then(r => r.json())
+        .then(restResp => { 
+            if (restResp.errors){
+              alert(restResp.errors)
+            } else { 
+                fetch('http://localhost:3000/reviews',{
+                    method: 'POST',
+                    headers: {
+                     'Content-Type': 'application/json',
+                     },
+                    body: JSON.stringify({
+                content,
+                rating,
+                user_id,
+                restaurant_id: restResp.id 
+             }),
+        })
+        .then(r => r.json())
+        .then(res => { 
+            if (res.errors){
+              alert(res.errors)
+            } else {
+                dispatch({ type: 'ADD_REVIEW', payload: res})
+                dispatch({ type: 'TOGGLE_MODAL'}) 
+            }
+        })
+        
+            }
+        })
+    }
+}

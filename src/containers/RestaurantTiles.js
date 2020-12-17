@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -15,7 +14,7 @@ const RestaurantTiles = (props) => {
                         <Link to={`/restaurants/${restaurant.id}`}> <p>{restaurant.name}</p></Link>
                         {restaurant.location && <p>{restaurant.location.address1}, {restaurant.location.city} </p>}
                         <p>{restaurant.distance && convertFeetToMiles(restaurant.distance)} miles away</p>
-                        {/* <img src={restaurant.image_url} alt={restaurant.name}/> */}
+                        <img src={restaurant.image_url} alt={restaurant.name}/>
                     </div>
                 </>)
                 )

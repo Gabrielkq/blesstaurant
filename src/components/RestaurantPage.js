@@ -16,9 +16,8 @@ class RestaurantPage extends Component {
     }
 
     render() {
-        console.log("tile props", this.props)
         const { redirect, history, toggleModal } = this.props
-        const { name, location, image_url, photos } = this.props.yelpRestaurant
+        const { name, location, image_url} = this.props.yelpRestaurant
         return (
             <div>
                 <ReviewModalForm/>
@@ -34,13 +33,16 @@ class RestaurantPage extends Component {
                     {location.display_address &&
                         <p>{ location.display_address[0]}, { location.display_address[1]} { location.display_address[2]} </p>    
                     }
-                    <p></p>
-                    <iframe title="map" width="600" height="450" 
-                    frameborder="0" style={{border:0}}
+                    <div>
+                    <div className="square">
+                        <img className="restImg" src={image_url} alt={name} width="500" />
+                    </div>
+                    <iframe className="map" title="map" width="550" height="400" 
+                    frameBorder="0" style={{border:0}}
                     src={`https://www.google.com/maps/embed/v1/search?q=${name},${location.display_address && location.display_address[0]},${location.display_address && location.display_address[1] }.&key=${process.env.REACT_APP_API_KEY}`} 
-                    allowfullscreen></iframe>
-                    <img src={image_url} alt={name} width="500" />
-               
+                    allowFullScreen></iframe>
+                    </div>
+                   
                 </>
                  }
                 </div>

@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
 import Review from '../components/Review';
 import { connect } from 'react-redux';
 
 const ReviewContainer = (props) => {
         return (
             <div>
-                {props.reviews.map(review => <Review review={review}/>)}
+                {props.reviews.map(review => <Review review={review} key={review.id}/>)}
             </div>
         );
     }
