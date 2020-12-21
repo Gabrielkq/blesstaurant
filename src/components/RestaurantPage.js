@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReviewModalForm from './ReviewModalForm';
 import ReviewContiner from '../containers/ReviewContainer';
-import { getYelpRestaurant, findBackEndRestaurant, clearRestaurantPage, toggleModal } from '../redux/actionCreators';
+import NotFound from './NotFound'
+import { getYelpRestaurant, findBackEndRestaurant, clearRestaurantPage, openModal, closeModal} from '../redux/actionCreators';
+import Button from './Button'
 
 class RestaurantPage extends Component {
 
@@ -13,10 +15,11 @@ class RestaurantPage extends Component {
 
     componentWillUnmount(){
         this.props.clearRestaurantPage()
+        this.props.closeModal()
     }
 
     render() {
-        const { redirect, history, toggleModal } = this.props
+        const { redirect, history, openModal } = this.props
         const { name, location, image_url} = this.props.yelpRestaurant
         return (
             <div>
@@ -24,22 +27,23 @@ class RestaurantPage extends Component {
                 <div id="leftside">
                 {redirect
                  ?  
-                    <div><p>404 not found</p></div> 
+                    <NotFound/>
                  :
                 <>
-                     <h1>{name}</h1>
-                     <button onClick={() => history.push("/restaurants")}>go back to search results</button>
-                     <button onClick={toggleModal}>add a review</button>
-                    {location.display_address &&
+                     <h1>{name} </h1>
+                  
+                     <Button onClick={() => history.push("/restaurants")} text={`go back to search results`} />
+                     <Button onClick={openModal} text={`add a review`}/>
+                  
                         <p>{ location.display_address[0]}, { location.display_address[1]} { location.display_address[2]} </p>    
-                    }
+                    
                     <div>
                     <div className="square">
                         <img className="restImg" src={image_url} alt={name} width="500" />
                     </div>
                     <iframe className="map" title="map" width="550" height="400" 
                     frameBorder="0" style={{border:0}}
-                    src={`https://www.google.com/maps/embed/v1/search?q=${name},${location.display_address && location.display_address[0]},${location.display_address && location.display_address[1] }.&key=${process.env.REACT_APP_API_KEY}`} 
+                    src={`https://www.google.com/maps/embed/v1/search?q=${name},${location.display_address[0]},${location.display_address[1] }.&key=${process.env.REACT_APP_API_KEY}`} 
                     allowFullScreen></iframe>
                     </div>
                    
@@ -58,9 +62,8 @@ class RestaurantPage extends Component {
 const msp = state =>({
     yelpRestaurant: state.restaurants.yelpRestaurant,
     redirect: state.restaurants.redirect,
-    restaurantInBackEnd: state.restaurants.restaurantInBackEnd,
-    restaurantId: state.restaurants.restaurantId
+    restaurantId: state.restaurants.restaurantId,
 })
 
 
-export default connect(msp, { getYelpRestaurant, findBackEndRestaurant, clearRestaurantPage, toggleModal } )(RestaurantPage);
+export default connect(msp, { getYelpRestaurant, findBackEndRestaurant, clearRestaurantPage, openModal, closeModal} )(RestaurantPage);

@@ -54,7 +54,10 @@ export const findBackEndRestaurant = (yelpId) =>{
 
 export const clearRestaurantPage = () =>({ type: 'CLEAR_RESTAURANT_PAGE' })
 
-export const toggleModal = () => ({ type: 'TOGGLE_MODAL'})
+
+export const openModal = () => ({ type: 'OPEN_MODAL'})
+
+export const closeModal = () => ({ type: 'CLOSE_MODAL'})
 
 export const autoLogin = (token) => {
     return dispatch => {
@@ -84,6 +87,15 @@ export const setToken = data => {
     }
   }
 
+export const handleContent = e =>({
+  type: 'HANDLE_CONTENT', payload: e.target.value
+})
+
+export const handleRating = e =>({
+  type: 'HANDLE_RATING', payload: e.target.value
+})
+
+
 export const logout = () => ({ type: 'LOGOUT' })
 
 export const addReviewOnly = (e, content, rating, user_id, restaurant_id) =>{
@@ -107,7 +119,7 @@ export const addReviewOnly = (e, content, rating, user_id, restaurant_id) =>{
               alert(res.errors)
             } else {
               dispatch({ type: 'ADD_REVIEW', payload: res})
-              dispatch({ type: 'TOGGLE_MODAL'}) 
+              dispatch({ type: 'CLOSE_MODAL'}) 
             }
         })
     }
@@ -158,7 +170,7 @@ export const addRestaurantandReview = (e, name, yelp_id, content, rating, user_i
               alert(res.errors)
             } else {
                 dispatch({ type: 'ADD_REVIEW', payload: res})
-                dispatch({ type: 'TOGGLE_MODAL'}) 
+                dispatch({ type: 'CLOSE_MODAL'}) 
             }
         })
         

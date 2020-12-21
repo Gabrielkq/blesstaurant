@@ -1,44 +1,28 @@
-import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getYelpResults } from '../redux/actionCreators';
-class Search extends Component {
+import { useState } from 'react';
+import Button from "./Button"
 
-    state = {
-        searchTerm: ""
-    }
-    
-    onChange = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value
-        })
-    }
+const Search = ({ getYelpResults, history }) =>{
 
-    searchYelpForRestaurants = (e) => {
+    const [searchTerm, setSearchTerm] = useState("")
+
+    const searchYelpForRestaurants = (e) => {
         e.preventDefault()
-        this.props.getYelpResults(this.state.searchTerm)
-        this.setState({searchTerm: ""})
-        this.props.history.push("/restaurants")
+        getYelpResults(searchTerm)
+        setSearchTerm("")
+        history.push("/restaurants")
     }
 
-    render() {
         return (
             <div>
-                <form onSubmit={this.searchYelpForRestaurants}>
+                <form onSubmit={searchYelpForRestaurants}>
                 <label>Search</label>
-                <input type="text" name="searchTerm" onChange={this.onChange} value={this.state.searchTerm} />
-                <br>
-                </br>
-                <input type="submit"/>
+                <input type="text" onChange={(e) => setSearchTerm(e.target.value)} value={searchTerm} />
+                 <Button text={<input type="submit"/>}/>
                 </form>
-             <br>
-             </br>
-
             </div>
         );
-    }
 }
 
-
-
-
-export default connect(null, {getYelpResults})(Search);
+export default connect(null, { getYelpResults })(Search);

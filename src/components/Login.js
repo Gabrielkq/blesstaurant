@@ -17,7 +17,7 @@ class Login extends Component {
 
     onSubmit = (e) => {
         e.preventDefault()
-        const { username, password} = this.state
+        const { username, password } = this.state
         fetch(`http://localhost:3000/login`, {
             method: "POST",
             headers: {

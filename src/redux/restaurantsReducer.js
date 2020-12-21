@@ -1,10 +1,9 @@
-const blankYelp = {location : {display_address: null},
+const blankYelp = {location : {display_address: []},
                    photos: [] }
 
 const initialState = {
     yelpResults: [],
     yelpRestaurant: blankYelp ,
-    restaurantInBackEnd: false,
     restaurantId: null,
     redirect: false,
     displayModal: false
@@ -18,13 +17,15 @@ const restaurantsReducer = (state=initialState, action) => {
         case 'SET_YELP':
             return {...state, yelpRestaurant: action.payload.yelp_restaurant}
         case 'CLEAR_RESTAURANT_PAGE':
-            return {...state, yelpRestaurant: blankYelp, restaurantInBackEnd: false, restaurantId: null}
+            return {...state, yelpRestaurant: blankYelp, restaurantId: null}
         case 'REDIRECT_404':
             return {...state, redirect: true}
         case 'SET_BACKEND':
-            return {...state, restaurantInBackEnd: true, restaurantId: action.payload}
-        case 'TOGGLE_MODAL':
-            return {...state, displayModal: !state.displayModal}
+            return {...state, restaurantId: action.payload}
+        case 'OPEN_MODAL':
+            return {...state, displayModal: true}
+        case 'CLOSE_MODAL':
+            return {...state, displayModal: false}
         default: 
          return {...state}
     } 

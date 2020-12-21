@@ -10,6 +10,7 @@ import RestaurantTiles from './containers/RestaurantTiles';
 import RestaurantPage from './components/RestaurantPage';
 import {autoLogin} from './redux/actionCreators';
 import { connect } from 'react-redux';
+import NotFound from './components/NotFound'
 
 class App extends Component {
     
@@ -27,9 +28,10 @@ class App extends Component {
              <Switch>
                <Route path="/login" render={() => <Login history={this.props.history} />} />
                <Route path="/signup" render={() => <Signup history={this.props.history} />} />
-               <Route path="/restaurants/:id" render={({ match }) => <RestaurantPage match={match} history={this.props.history}/>}/> 
+               <Route path="/restaurants/:id" render={({ match }) => <RestaurantPage match={match} history={this.props.history }  key={window.location.pathname} />}/> 
                <Route exact path="/restaurants" render={() => <RestaurantTiles/>} />
                <Route exact path="/" render={() => <Home />}/>
+               <Route path="/" component={NotFound} />
              </Switch>
       </div>
   );

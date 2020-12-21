@@ -1,16 +1,18 @@
 import Review from '../components/Review';
 import { connect } from 'react-redux';
 
-const ReviewContainer = (props) => {
+const ReviewContainer = ({ reviews, userId }) => {
         return (
             <div>
-                {props.reviews.map(review => <Review review={review} key={review.id}/>)}
+                {reviews.map(review => <Review review={review} userId={userId} key={review.id}/>)}
             </div>
         );
     }
 
 const msp = state => ({
-    reviews: state.reviews.reviews
+    reviews: state.reviews.reviews,
+    userId : state.user.userId
 })
+
 
 export default connect(msp)(ReviewContainer);

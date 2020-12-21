@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom';
 import Search from './Search';
 import { connect } from 'react-redux';
 import { logout } from '../redux/actionCreators'
+import Button from './Button.js';
 
 const NavBar = ({logout, username, history }) => {
    return (
@@ -9,7 +10,7 @@ const NavBar = ({logout, username, history }) => {
                 <NavLink to="/Home">Home</NavLink>
                 {username
                 ?   
-                 <button onClick={logout} >logout {username}</button>
+                 <Button onClick={logout} text={`logout ${username}`} />
                 :
                 <>
                 <NavLink to="/Login">Login</NavLink>
