@@ -2,11 +2,12 @@ import { connect } from 'react-redux';
 import { closeModal, addReviewOnly, addRestaurantandReview, handleContent, handleRating} from '../redux/actionCreators';
 import { Link } from 'react-router-dom';
 
-const ReviewModalForm  = (displayModal, closeModal, userId, restaurantId, addReviewOnly, addRestaurantandReview, yelpId, name, content, rating, handleContent, handleRating ) => {
 
+const ReviewModalForm  = ({displayModal, closeModal, userId, restaurantId, addReviewOnly, addRestaurantandReview, yelpId, name, content, rating, handleContent, handleRating }) => {
 
+    const display = displayModal ? "block" : "none"
         // const { displayModal, closeModal, userId, restaurantId, addReviewOnly, addRestaurantandReview, yelpId, name, content, rating, handleContent, handleRating } = this.props
-        const display = displayModal ? "block" : "none"
+     
         return (
             <div id="myModal" className="modal" style={{display}}>
                  <div className="modal-content">
@@ -49,5 +50,6 @@ const msp = state => ({
     content: state.reviews.newReviewContent,
     rating: state.reviews.newReviewRating
 })
+
 
 export default connect(msp, { closeModal, addReviewOnly, addRestaurantandReview, handleContent, handleRating })(ReviewModalForm);

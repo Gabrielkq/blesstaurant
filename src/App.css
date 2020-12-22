@@ -128,7 +128,20 @@ html, body {
   border: 0.3rem outset rgb(193, 201, 238);
   width: max-content;
   margin: auto;
-  padding: .2rem;
+  font-family: Baskerville,Baskerville Old Face,Hoefler Text,Garamond,Times New Roman,serif; 
+
+}
+
+p {
+  font-family: Baskerville,Baskerville Old Face,Hoefler Text,Garamond,Times New Roman,serif; 
+}
+
+
+h1 {
+  font-family: Baskerville,Baskerville Old Face,Hoefler Text,Garamond,Times New Roman,serif; 
+}
+
+h3 {
   font-family: Baskerville,Baskerville Old Face,Hoefler Text,Garamond,Times New Roman,serif; 
 
 }
@@ -140,4 +153,13 @@ html, body {
 .tile-img {
   height: 250px;
   width: 250px
+}
+
+.ayo{
+  height: 600px
+}
+
+.keep-in-row {
+  display: inline-flex;
+  align-items: center;
 }

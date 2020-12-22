@@ -18,8 +18,8 @@ const Search = ({ getYelpResults, history }) =>{
             <div>
                 <form onSubmit={searchYelpForRestaurants}>
                 <label>Search</label>
-                <input type="text" onChange={(e) => setSearchTerm(e.target.value)} value={searchTerm} />
-                 <Button text={<input type="submit"/>}/>
+                <input type="text" placeHolder="enter location" onChange={(e) => setSearchTerm(e.target.value)} value={searchTerm} />
+                 <Button text={<input type="submit"/>} className="keep-in-row"/>
                 </form>
             </div>
         );

@@ -31,12 +31,10 @@ class RestaurantPage extends Component {
                  :
                 <>
                      <h1>{name} </h1>
-                  
-                     <Button onClick={() => history.push("/restaurants")} text={`go back to search results`} />
-                     <Button onClick={openModal} text={`add a review`}/>
-                  
                         <p>{ location.display_address[0]}, { location.display_address[1]} { location.display_address[2]} </p>    
-                    
+                      <div className="keep-in-row">  <Button onClick={() => history.push("/restaurants")} text={`go back to search results`} />
+                     <Button onClick={openModal} text={`add a review`}/>
+                     </div>                
                     <div>
                     <div className="square">
                         <img className="restImg" src={image_url} alt={name} width="500" />

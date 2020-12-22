@@ -11,6 +11,7 @@ import RestaurantPage from './components/RestaurantPage';
 import {autoLogin} from './redux/actionCreators';
 import { connect } from 'react-redux';
 import NotFound from './components/NotFound'
+import EasterEgg from './components/EasterEgg';
 
 class App extends Component {
     
@@ -19,12 +20,39 @@ class App extends Component {
       if (token){
         this.props.autoLogin(token)
       } 
+      document.addEventListener("keydown", this.ayoEasterEgg, false);
+      document.addEventListener("keyup", this.ayoStateFalse, false);
+  }
+
+  state = {
+    ayo: 0
+  }
+
+
+  ayoStateFalse = (event) => {
+    if(event.keyCode === 65 || event.keyCode === 89 || event.keyCode === 79) {
+      this.setState({
+        ayo: this.state.ayo - 1
+      })
+     }
+  }
+
+  ayoEasterEgg = (event) => {
+    if(!event.repeat) {
+      if(event.keyCode === 65 || event.keyCode === 89 || event.keyCode === 79) {
+        this.setState({
+          ayo: this.state.ayo + 1
+         })
+       }
+     }
   }
 
   render(){
+   
     return (
       <div className="App">
           <NavBar history={this.props.history} />
+         {(this.state.ayo === 3) && <EasterEgg/>}
              <Switch>
                <Route path="/login" render={() => <Login history={this.props.history} />} />
                <Route path="/signup" render={() => <Signup history={this.props.history} />} />

@@ -11,10 +11,12 @@ const RestaurantTiles = (props) => {
                :
                <>
                     <div className="rest-tile">
-                        <Link key={restaurant.id} to={`/restaurants/${restaurant.id}`}> <p>{restaurant.name}</p>
+                        <Link key={restaurant.id} to={`/restaurants/${restaurant.id}`}> <h3>{restaurant.name}</h3></Link>
                         {restaurant.location && <p>{restaurant.location.address1}, {restaurant.location.city} </p>}
                         <p>{restaurant.distance && convertFeetToMiles(restaurant.distance)} miles away</p>
-                        <img className="tile-img" src={restaurant.image_url} alt={restaurant.name}/></Link>
+                        <Link key={restaurant.id} to={`/restaurants/${restaurant.id}`}> 
+                             <img className="tile-img" src={restaurant.image_url} alt={restaurant.name}/>
+                        </Link>
                     </div>
                 </>)
                 )
