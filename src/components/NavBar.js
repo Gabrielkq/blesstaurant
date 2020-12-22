@@ -6,7 +6,7 @@ import Button from './Button.js';
 
 const NavBar = ({logout, username, history }) => {
    return (
-            <div>
+            <div id="nav-bar">
              
                 {username
                 ?   

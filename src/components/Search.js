@@ -1,14 +1,15 @@
 import { connect } from 'react-redux';
-import { getYelpResults } from '../redux/actionCreators';
+import { getYelpResults, clearYelpResutls } from '../redux/actionCreators';
 import { useState } from 'react';
 import Button from "./Button"
 
-const Search = ({ getYelpResults, history }) =>{
+const Search = ({ getYelpResults, history, clearYelpResutls }) =>{
 
     const [searchTerm, setSearchTerm] = useState("")
 
     const searchYelpForRestaurants = (e) => {
         e.preventDefault()
+        clearYelpResutls()
         getYelpResults(searchTerm)
         setSearchTerm("")
         history.push("/restaurants")
@@ -25,4 +26,4 @@ const Search = ({ getYelpResults, history }) =>{
         );
 }
 
-export default connect(null, { getYelpResults })(Search);
+export default connect(null, { getYelpResults, clearYelpResutls })(Search);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReviewModalForm from './ReviewModalForm';
-import ReviewContiner from '../containers/ReviewContainer';
+import ReviewContainer from '../containers/ReviewContainer';
 import NotFound from './NotFound'
 import { getYelpRestaurant, findBackEndRestaurant, clearRestaurantPage, openModal, closeModal} from '../redux/actionCreators';
 import Button from './Button'
@@ -22,9 +22,9 @@ class RestaurantPage extends Component {
         const { redirect, history, openModal } = this.props
         const { name, location, image_url} = this.props.yelpRestaurant
         return (
-            <div>
+            <div id="rest-page">
                 <ReviewModalForm/>
-                <div id="leftside">
+                
                 {redirect
                  ?  
                     <NotFound/>
@@ -36,6 +36,7 @@ class RestaurantPage extends Component {
                      <Button onClick={openModal} text={`add a review`}/>
                      </div>                
                     <div>
+                    <div className="keep-in-row">
                     <div className="square">
                         <img className="restImg" src={image_url} alt={name} width="500" />
                     </div>
@@ -44,13 +45,14 @@ class RestaurantPage extends Component {
                     src={`https://www.google.com/maps/embed/v1/search?q=${name},${location.display_address[0]},${location.display_address[1] }.&key=${process.env.REACT_APP_API_KEY}`} 
                     allowFullScreen></iframe>
                     </div>
+                    </div>
                    
                 </>
                  }
-                </div>
-                <div id="rightside">
-                    <ReviewContiner/>
-                </div>
+                
+                 <p>Reviews:</p>
+                    <ReviewContainer/>
+             
 
             </div>
         );

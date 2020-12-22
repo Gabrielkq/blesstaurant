@@ -13,6 +13,7 @@ import { connect } from 'react-redux';
 import NotFound from './components/NotFound'
 import EasterEgg from './components/EasterEgg';
 
+
 class App extends Component {
     
   componentDidMount(){
@@ -61,6 +62,7 @@ class App extends Component {
                <Route exact path="/" render={() => <Home />}/>
                <Route path="/" component={NotFound} />
              </Switch>
+             
       </div>
   );
   }

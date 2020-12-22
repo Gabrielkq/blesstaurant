@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 
 const RestaurantTiles = (props) => {
         return (
-            <div>
+            <div id="rest-main">
+            <div id="rest-sticky">
                {sortRest(props.restaurants).map(restaurant => (
                restaurant.none
                ? 
@@ -21,6 +22,7 @@ const RestaurantTiles = (props) => {
                 </>)
                 )
                 }
+                </div>
                 </div>
         );
     }

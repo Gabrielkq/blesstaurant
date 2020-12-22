@@ -3,8 +3,12 @@ import { connect } from 'react-redux';
 
 const ReviewContainer = ({ reviews, userId }) => {
         return (
-            <div>
-                {reviews.map(review => <Review review={review} userId={userId} key={review.id}/>)}
+            <div id="rev-cont">
+                {(reviews.length === 0) 
+                ?
+                <p>no reviews to show yet</p>
+                :
+                reviews.map(review => <Review review={review} userId={userId} key={review.id}/>)}
             </div>
         );
     }

@@ -54,7 +54,7 @@ class Signup extends Component {
     render() {
         console.log(this.props.currentUser)
         return (
-            <>
+            <div className="login">
             <h1>Enter to get Blessed</h1>
             <form onSubmit={this.onSubmit}>
                 <label>
@@ -74,7 +74,7 @@ class Signup extends Component {
                 <br></br>
                   <input type="submit" value="Submit"/>
             </form>
-            </>
+            </div>
         );
     }
 }

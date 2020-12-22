@@ -47,7 +47,7 @@ class Login extends Component {
 
     render() {
         return (
-            <>
+            <div className="login">
             <h1>Login</h1>
             <form onSubmit={this.onSubmit}>
                 <label>
@@ -60,7 +60,7 @@ class Login extends Component {
                 </label><br></br>
                   <input type="submit" value="Submit"/>
             </form>
-            </>
+            </div>
         );
     }
 }

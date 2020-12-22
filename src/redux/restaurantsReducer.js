@@ -26,6 +26,10 @@ const restaurantsReducer = (state=initialState, action) => {
             return {...state, displayModal: true}
         case 'CLOSE_MODAL':
             return {...state, displayModal: false}
+        case 'CLEAR_YELP_RESULTS':
+            return {...state, yelpResults: []}
+        case 'ADD_REST_ID':
+            return {...state, restaurantId: action.payload} 
         default: 
          return {...state}
     } 

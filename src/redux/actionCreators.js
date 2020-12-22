@@ -13,6 +13,10 @@ export const getYelpResults = (searchTerm) =>{
     }
 }
 
+export const clearYelpResutls = () => ({
+  type: 'CLEAR_YELP_RESULTS'
+})
+
 export const getYelpRestaurant = (id) =>{
     return dispatch => {
         fetch("http://localhost:3000/get_restaurant", {
@@ -170,7 +174,8 @@ export const addRestaurantandReview = (e, name, yelp_id, content, rating, user_i
               alert(res.errors)
             } else {
                 dispatch({ type: 'ADD_REVIEW', payload: res})
-                dispatch({ type: 'CLOSE_MODAL'}) 
+                dispatch({ type: 'CLOSE_MODAL'})
+                dispatch({ type: 'ADD_REST_ID', payload: restResp.id }) 
             }
         })
         
