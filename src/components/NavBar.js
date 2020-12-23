@@ -3,11 +3,14 @@ import Search from './Search';
 import { connect } from 'react-redux';
 import { logout } from '../redux/actionCreators'
 import Button from './Button.js';
+import blesslogo from './blesslogo.png'
+
 
 const NavBar = ({logout, username, history }) => {
    return (
             <div id="nav-bar">
-             
+            
+             <img className="bless-logo" src={blesslogo} alt="logo"/>
                 {username
                 ?   
                 <div className="flush-right">

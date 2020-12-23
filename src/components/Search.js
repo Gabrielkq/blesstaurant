@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import { getYelpResults, clearYelpResutls } from '../redux/actionCreators';
 import { useState } from 'react';
-import Button from "./Button"
 
 const Search = ({ getYelpResults, history, clearYelpResutls }) =>{
 

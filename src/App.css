@@ -95,6 +95,7 @@ html, body {
 .square {
   height: 400px;
   width: 400px;
+  margin:10px
 }
 
 .map {
@@ -245,4 +246,10 @@ transform: translateX(-50%);
 .delete-button {
   position: relative;
   left: 140px
+}
+
+.bless-logo {
+  width: 480px;
+  float: left;
+  margin-top: 13px
 }

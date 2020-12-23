@@ -1,4 +1,3 @@
-
 import ayo from './ayo.jpg'
 
 const EasterEgg = () => {

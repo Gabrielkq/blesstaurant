@@ -4,7 +4,8 @@ import ReviewModalForm from './ReviewModalForm';
 import ReviewContainer from '../containers/ReviewContainer';
 import NotFound from './NotFound'
 import { getYelpRestaurant, findBackEndRestaurant, clearRestaurantPage, openModal, closeModal} from '../redux/actionCreators';
-import Button from './Button'
+import Button from './Button';
+import Carousel from 'nuka-carousel';
 
 class RestaurantPage extends Component {
 
@@ -20,7 +21,7 @@ class RestaurantPage extends Component {
 
     render() {
         const { redirect, history, openModal } = this.props
-        const { name, location, image_url, display_phone} = this.props.yelpRestaurant
+        const { name, location, display_phone, photos} = this.props.yelpRestaurant
         return (
             <div id="rest-page">
                 <ReviewModalForm/>
@@ -40,8 +41,13 @@ class RestaurantPage extends Component {
                     <div>
                     <div className="keep-in-row">
                     <div className="square">
-                        <img className="restImg" src={image_url} alt={name} width="500" />
+                        <Carousel>
+                            <img src={photos[0]} alt="restaraunt one" />
+                            <img src={photos[1]} alt="restaraunt two"/>
+                            <img src={photos[2]} alt="restaraunt three"/>
+                         </Carousel>
                     </div>
+       
                     <iframe className="map" title="map" width="550" height="400" 
                     frameBorder="0" style={{border:0}}
                     src={`https://www.google.com/maps/embed/v1/search?q=${name},${location.display_address[0]},${location.display_address[1] }.&key=${process.env.REACT_APP_API_KEY}`} 
