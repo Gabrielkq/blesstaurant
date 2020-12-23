@@ -12,7 +12,9 @@ const Review = ({review, userId, deleteReview}) => {
                 <br></br>
                                    as reviewed by: {review.user.username}
                 </p>
+                <div className="delete-button">
                 {(userId === review.user_id) && <Button onClick={()=> deleteReview(review.id)} text={'delete your review'}/>}
+                </div>
             </div>
         );
     }
