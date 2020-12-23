@@ -20,7 +20,7 @@ class RestaurantPage extends Component {
 
     render() {
         const { redirect, history, openModal } = this.props
-        const { name, location, image_url} = this.props.yelpRestaurant
+        const { name, location, image_url, display_phone} = this.props.yelpRestaurant
         return (
             <div id="rest-page">
                 <ReviewModalForm/>
@@ -30,8 +30,10 @@ class RestaurantPage extends Component {
                     <NotFound/>
                  :
                 <>
+
                      <h1>{name} </h1>
                         <p>{ location.display_address[0]}, { location.display_address[1]} { location.display_address[2]} </p>    
+                        <p>{display_phone}</p>
                       <div className="keep-in-row">  <Button onClick={() => history.push("/restaurants")} text={`go back to search results`} />
                      <Button onClick={openModal} text={`add a review`}/>
                      </div>                

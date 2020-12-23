@@ -21,28 +21,28 @@ class App extends Component {
       if (token){
         this.props.autoLogin(token)
       } 
-      document.addEventListener("keydown", this.ayoEasterEgg, false);
-      document.addEventListener("keyup", this.ayoStateFalse, false);
+      document.addEventListener("keydown", this.easterEggGetttingCloser, false);
+      document.addEventListener("keyup", this.easterEggFurtherAway, false);
   }
 
   state = {
-    ayo: 0
+    easterEgg: 0
   }
 
 
-  ayoStateFalse = (event) => {
+  easterEggFurtherAway = (event) => {
     if(event.keyCode === 65 || event.keyCode === 89 || event.keyCode === 79) {
       this.setState({
-        ayo: this.state.ayo - 1
+        easterEgg: this.state.easterEgg - 1
       })
      }
   }
 
-  ayoEasterEgg = (event) => {
+  easterEggGetttingCloser = (event) => {
     if(!event.repeat) {
       if(event.keyCode === 65 || event.keyCode === 89 || event.keyCode === 79) {
         this.setState({
-          ayo: this.state.ayo + 1
+          easterEgg: this.state.easterEgg + 1
          })
        }
      }
@@ -53,7 +53,7 @@ class App extends Component {
     return (
       <div className="App">
           <NavBar history={this.props.history} />
-         {(this.state.ayo === 3) && <EasterEgg/>}
+         {(this.state.easterEgg === 3) && <EasterEgg/>}
              <Switch>
                <Route path="/login" render={() => <Login history={this.props.history} />} />
                <Route path="/signup" render={() => <Signup history={this.props.history} />} />

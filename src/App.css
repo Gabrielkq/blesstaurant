@@ -123,8 +123,8 @@ html, body {
 .button {
   border: 0.2rem outset rgb(193, 201, 238);
   width: max-content;
-  margin: auto;
-  font-family: Baskerville,Baskerville Old Face,Hoefler Text,Garamond,Times New Roman,serif; 
+  margin: 5px;
+  font-family: Baskerville,Baskerville Old Face,Hoefler Text,Garamond,Times New Roman,serif;
 
 }
 
@@ -162,10 +162,10 @@ h3 {
 .ayo{
   height: 600px;
   z-index:1000;
-  position: absolute;
+  position: fixed;
   left: 50%;
   transform: translateX(-50%);
-  top: 150px
+  top: 100px
 }
 
 .keep-in-row {
@@ -222,5 +222,22 @@ transform: translateX(-50%);
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
-  top: 600px
+  top: 660px
+}
+
+.flush-right{
+  position: relative;
+  float: right
+}
+
+#search {
+  position: absolute;
+  top: 50px;
+  margin: auto;
+  width: 100%;
+  font-size: 23px;
+}
+
+#blessed {
+  font-size: 60px;
 }

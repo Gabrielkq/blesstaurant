@@ -6,13 +6,13 @@ class Home extends Component {
         return (
             <div id="home">
                  {this.props.userId && <h2>Many Blessings to you, {this.props.username}</h2>}
-                   <p>
+                   <p id="blessed">
           Blesstaurant 🌱
         </p>
-        <br>
-        </br>
-        <p>Search anywhere in the world to find vegan food. </p>
-        <p> Read reviews from other vegan to find the tasiest places to eat!</p>
+   
+        <p>A one stop resource to find vegan food all over the world. </p>
+        <p>Enter a location into the search field and we'll find you places where they serve ethical plant based treats. Yummy! 😀</p>
+        <p> Read reviews from other vegans to find the tasiest places and other recommendations!</p>
             </div>
         );
     }

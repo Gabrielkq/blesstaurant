@@ -15,7 +15,7 @@ const RestaurantTiles = (props) => {
                         <Link key={restaurant.id} to={`/restaurants/${restaurant.id}`}> <h3>{restaurant.name}</h3></Link>
                         {restaurant.location && <p>{restaurant.location.address1}, {restaurant.location.city} </p>}
                         <p>{restaurant.distance && convertFeetToMiles(restaurant.distance)} miles away</p>
-                        <Link key={restaurant.id} to={`/restaurants/${restaurant.id}`}> 
+                        <Link key={restaurant.name} to={`/restaurants/${restaurant.id}`}> 
                              <img className="tile-img" src={restaurant.image_url} alt={restaurant.name}/>
                         </Link>
                     </div>

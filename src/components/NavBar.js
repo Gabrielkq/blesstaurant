@@ -10,12 +10,16 @@ const NavBar = ({logout, username, history }) => {
              
                 {username
                 ?   
+                <div className="flush-right">
                  <Button onClick={logout} text={`logout ${username}`} />
+                 </div>
                 :
                 <>
+                 <div className="flush-right">
                 <div className="keep-in-row">
                 <Link to="/Login"><Button  text={"Login"}/></Link>
                 <Link to="/Signup"><Button  text={"Sign up"}/></Link>
+                </div>
                 </div>
                 </>
                 }

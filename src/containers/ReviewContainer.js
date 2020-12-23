@@ -6,7 +6,7 @@ const ReviewContainer = ({ reviews, userId }) => {
             <div id="rev-cont">
                 {(reviews.length === 0) 
                 ?
-                <p>no reviews to show yet</p>
+                <p>no reviews so far....</p>
                 :
                 reviews.map(review => <Review review={review} userId={userId} key={review.id}/>)}
             </div>
