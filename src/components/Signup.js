@@ -1,25 +1,17 @@
-import React, { Component } from 'react';
+import { useState } from 'react';
 import { connect } from 'react-redux';
 import {setToken} from '../redux/actionCreators';
 
-class Signup extends Component {
+const Signup = (props) => {
 
-    state = {
-        username: "",
-        password: "",
-        passwordConfirmation: ""
-    }
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+    const [passwordConf, setPasswordConf] = useState("")
 
-    onChange = (e) =>{
-        this.setState({
-            [e.target.name]: e.target.value
-        })
-    }
-
-    onSubmit = (e) => {
+    const onSubmit = (e) => {
         e.preventDefault()
-        const {username, password, passwordConfirmation} = this.state;
-        if (password === passwordConfirmation){
+
+        if (password === passwordConf){
                 fetch(`http://localhost:3000/users`, {
                    method: "POST",
                    headers: {
@@ -36,47 +28,43 @@ class Signup extends Component {
                     if (response.errors){
                         alert(response.errors)
                     } else {
-                        this.props.setToken(response)
-                        this.props.history.push("/")
+                        props.setToken(response);
+                        props.history.push("/");
+                        setUsername("");
+                        setPassword("");
+                        setPasswordConf("");
                     }
                 })
                 
-                this.setState({
-                    username: "",
-                    password: "",
-                    passwordConfirmation: ""
-                })  
         } else {
-            alert('yo pazzwerdz dunt match')
+            alert('your passwords do not match')
         }
     }
 
-    render() {
-        console.log(this.props.currentUser)
         return (
             <div className="login">
             <h1>Enter to get Blessed</h1>
-            <form onSubmit={this.onSubmit}>
+            <form onSubmit={onSubmit}>
                 <label>
                  Enter Your Username:
-                  <input onChange={this.onChange} type="text" name="username" value={this.state.username}/>
+                  <input onChange={e => setUsername(e.target.value)} type="text" name="username" value={username}/>
                 </label>
                 <br></br>
                 <label>
                  Enter Your Password:
-                  <input onChange={this.onChange} type="password" name="password" value={this.state.password}/>
+                  <input onChange={e => setPassword(e.target.value)} type="password" name="password" value={password}/>
                 </label>
                 <br></br>
                 <label>
                  Re-Enter Your Password:
-                  <input onChange={this.onChange} type="password" name="passwordConfirmation" value={this.state.passwordConfirmation}/>
+                  <input onChange={e => setPasswordConf(e.target.value)} type="password" name="passwordConfirmation" value={passwordConf}/>
                 </label>
                 <br></br>
                   <input type="submit" value="Submit"/>
             </form>
             </div>
         );
-    }
+        
 }
 
 export default connect(null, {setToken})(Signup);
