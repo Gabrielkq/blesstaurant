@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import ReviewModalForm from './ReviewModalForm';
 import ReviewContainer from '../containers/ReviewContainer';
 import NotFound from './NotFound'
-import { getYelpRestaurant, findBackEndRestaurant, clearRestaurantPage, openModal, closeModal} from '../redux/actionCreators';
+import { getYelpRestaurant, findBackEndRestaurant, clearRestaurantPage, openModal, closeModal } from '../redux/actionCreators';
 import Button from './Button';
 import Carousel from 'nuka-carousel';
 
@@ -26,7 +26,7 @@ class RestaurantPage extends Component {
             <div id="rest-page">
                 <ReviewModalForm/>
                 
-                {redirect
+                {!!redirect
                  ?  
                     <NotFound/>
                  :
@@ -45,7 +45,7 @@ class RestaurantPage extends Component {
                             <img src={photos[0]} alt="restaraunt one" />
                             <img src={photos[1]} alt="restaraunt two"/>
                             <img src={photos[2]} alt="restaraunt three"/>
-                         </Carousel>
+                         </Carousel>    
                     </div>
        
                     <iframe className="map" title="map" width="550" height="400" 
@@ -58,8 +58,8 @@ class RestaurantPage extends Component {
                 </>
                  }
                 
-                 <p>Reviews:</p>
-                    <ReviewContainer/>
+                 {!redirect && <p>Reviews:</p>}
+                    <ReviewContainer redirect={redirect}/>
              
 
             </div>
@@ -70,7 +70,7 @@ class RestaurantPage extends Component {
 const msp = state =>({
     yelpRestaurant: state.restaurants.yelpRestaurant,
     redirect: state.restaurants.redirect,
-    restaurantId: state.restaurants.restaurantId,
+    restaurantId: state.restaurants.restaurantId
 })
 
 

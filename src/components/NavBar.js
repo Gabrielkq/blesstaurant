@@ -11,7 +11,7 @@ const NavBar = ({logout, username, history }) => {
             <div id="nav-bar">
             
              <img className="bless-logo" src={blesslogo} alt="logo"/>
-                {username
+                {!!username
                 ?   
                 <div className="flush-right">
                  <Button onClick={logout} text={`logout ${username}`} />

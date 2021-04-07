@@ -14,7 +14,6 @@ const store = createStore(reducer, compose(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 )
 
-
 ReactDOM.render(
   <React.StrictMode>
     <Router>

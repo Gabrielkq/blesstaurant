@@ -162,24 +162,24 @@ export const addRestaurantandReview = (e, name, yelp_id, content, rating, user_i
                      'Content-Type': 'application/json',
                      },
                     body: JSON.stringify({
-                content,
-                rating,
-                user_id,
-                restaurant_id: restResp.id 
-             }),
-        })
-        .then(r => r.json())
-        .then(res => { 
-            if (res.errors){
-              alert(res.errors)
-            } else {
-                dispatch({ type: 'ADD_REVIEW', payload: res})
-                dispatch({ type: 'CLOSE_MODAL'})
-                dispatch({ type: 'ADD_REST_ID', payload: restResp.id }) 
+                      content,
+                      rating,
+                      user_id,
+                      restaurant_id: restResp.id 
+                     }),
+                 })
+                  .then(r => r.json())
+                  .then(res => { 
+                    if (res.errors){
+                     alert(res.errors)
+                    } else {
+                      dispatch({ type: 'ADD_REVIEW', payload: res})
+                      dispatch({ type: 'CLOSE_MODAL'})
+                      dispatch({ type: 'ADD_REST_ID', payload: restResp.id }) 
+                    }
+                  })       
             }
-        })
-        
-            }
-        })
+         })
+         
     }
 }

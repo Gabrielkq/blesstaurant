@@ -1,9 +1,10 @@
 import { connect } from 'react-redux';
 import { deleteReview } from '../redux/actionCreators'
 import Button from './Button'
+import { render } from '@testing-library/react';
 
 const Review = ({review, userId, deleteReview}) => {
-        
+
        return (
            <div className="review">
                 <p className="rev"> {review.content}
@@ -17,7 +18,7 @@ const Review = ({review, userId, deleteReview}) => {
                 </div>
             </div>
         );
-    }
+    
+}
 
-
-export default connect(null, {deleteReview})(Review);
+export default connect(null, { deleteReview })(Review);

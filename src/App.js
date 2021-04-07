@@ -8,7 +8,7 @@ import Home from './components/Home';
 import NavBar from './components/NavBar';
 import RestaurantTiles from './containers/RestaurantTiles';
 import RestaurantPage from './components/RestaurantPage';
-import {autoLogin} from './redux/actionCreators';
+import { autoLogin } from './redux/actionCreators';
 import { connect } from 'react-redux';
 import NotFound from './components/NotFound'
 import EasterEgg from './components/EasterEgg';
@@ -29,7 +29,6 @@ class App extends Component {
     easterEgg: 0
   }
 
-
   easterEggFurtherAway = (event) => {
     if(event.keyCode === 65 || event.keyCode === 89 || event.keyCode === 79) {
       this.setState({
@@ -49,7 +48,6 @@ class App extends Component {
   }
 
   render(){
-   
     return (
       <div className="App">
           <NavBar history={this.props.history} />
@@ -58,7 +56,7 @@ class App extends Component {
                <Route path="/login" render={() => <Login history={this.props.history} />} />
                <Route path="/signup" render={() => <Signup history={this.props.history} />} />
                <Route path="/restaurants/:id" render={({ match }) => <RestaurantPage match={match} history={this.props.history }  key={window.location.pathname} />}/> 
-               <Route exact path="/restaurants" render={() => <RestaurantTiles/>} />
+               <Route exact path="/restaurants" render={() => <RestaurantTiles  />} />
                <Route exact path="/" render={() => <Home />}/>
                <Route path="/" component={NotFound} />
              </Switch>
@@ -68,4 +66,4 @@ class App extends Component {
   }
 };
 
-export default connect( null, {autoLogin})(App);
+export default connect( null, { autoLogin })(App);

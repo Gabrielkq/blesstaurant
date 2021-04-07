@@ -3,29 +3,28 @@ import { closeModal, addReviewOnly, addRestaurantandReview, handleContent, handl
 import { Link } from 'react-router-dom';
 
 
-const ReviewModalForm  = ({displayModal, closeModal, userId, restaurantId, addReviewOnly, addRestaurantandReview, yelpId, name, content, rating, handleContent, handleRating }) => {
+const ReviewModalForm  = ({displayModal, closeModal, userId, restaurantId, 
+                            addReviewOnly, addRestaurantandReview,
+                             yelpId, name, content, rating, handleContent, handleRating }) => {
 
     const display = displayModal ? "block" : "none"
-        // const { displayModal, closeModal, userId, restaurantId, addReviewOnly, addRestaurantandReview, yelpId, name, content, rating, handleContent, handleRating } = this.props
-     
         return (
             <div id="myModal" className="modal" style={{display}}>
                  <div className="modal-content">
-                    <span className="close" onClick={closeModal}>&times;</span>
+                    <span className="close" onClick={closeModal} >close &times;</span>
                     {!userId 
                     ?
                     <p><Link to="/signup">Sign up</Link> or <Link to="/login">Login</Link> to review this restaurant</p>
                     :
                             <form 
                                 onSubmit={(e) => !content 
-                                                    ? e.preventDefault(alert('content field cannot be blank')) 
+                                                    ? e.preventDefault(alert('review field cannot be blank')) 
                                                     : !restaurantId 
                                                         ? addRestaurantandReview(e, name, yelpId, content, rating, userId)
                                                         : addReviewOnly(e, content, rating, userId, restaurantId) }>
-                            <label>
-                              Review:
-                              <textarea placeholder="add review here" name="content" value={content} onChange={handleContent} />
-                            </label>
+                            
+                              <textarea rows="10" placeholder="type your review here" name="content" value={content} onChange={handleContent} />
+                           
                             <br/>   
                             <label>
                                 Rating:

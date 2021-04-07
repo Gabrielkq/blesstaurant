@@ -223,7 +223,7 @@ transform: translateX(-50%);
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
-  top: 660px
+  top: 680px
 }
 
 .flush-right{
@@ -253,3 +253,13 @@ transform: translateX(-50%);
   float: left;
   margin-top: 13px
 }
+
+.not-found {
+  position: fixed;
+  position: absolute;
+  top: 40%;
+  margin-left: 40%
+
+}
+
+textarea { height: auto; }

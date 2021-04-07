@@ -7,7 +7,6 @@ const initialState = {
     restaurantId: null,
     redirect: false,
     displayModal: false
-
 }
 
 const restaurantsReducer = (state=initialState, action) => {

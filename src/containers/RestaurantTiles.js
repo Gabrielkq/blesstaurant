@@ -6,16 +6,16 @@ const RestaurantTiles = (props) => {
             <div id="rest-main">
             <div id="rest-sticky">
                {sortRest(props.restaurants).map(restaurant => (
-               restaurant.none
+               !!restaurant.none
                ? 
-                <h3>No Results Found, Try Another Search</h3>
+                <h3 key={"no Results"}>No Results Found, Try Another Search</h3>
                :
                <>
-                    <div className="rest-tile">
-                        <Link key={restaurant.id} to={`/restaurants/${restaurant.id}`}> <h3>{restaurant.name}</h3></Link>
-                        {restaurant.location && <p>{restaurant.location.address1}, {restaurant.location.city} </p>}
-                        <p>{restaurant.distance && convertFeetToMiles(restaurant.distance)} miles away</p>
-                        <Link key={restaurant.name} to={`/restaurants/${restaurant.id}`}> 
+                    <div className="rest-tile" >
+                        <Link to={`/restaurants/${restaurant.id}`} key={restaurant.id.toString()}  > <h3  >{restaurant.name}</h3></Link>
+                        <p>{restaurant.location.address1}, {restaurant.location.city} </p>
+                        <p>{convertFeetToMiles(restaurant.distance)} miles away</p>
+                        <Link to={`/restaurants/${restaurant.id}`} key={restaurant.name}> 
                              <img className="tile-img" src={restaurant.image_url} alt={restaurant.name}/>
                         </Link>
                     </div>

@@ -1,23 +1,15 @@
-import React, { Component } from 'react';
+import { useState } from 'react';
 import { connect } from 'react-redux';
 import { setToken } from '../redux/actionCreators'
 
-class Login extends Component {
+const Login = (props) => {
 
-    state = {
-        username: "",
-        password: ""
-    }
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
 
-    onChange = (e) =>{
-        this.setState({
-            [e.target.name]: e.target.value
-        })
-    }
 
-    onSubmit = (e) => {
+    const onSubmit = (e) => {
         e.preventDefault()
-        const { username, password } = this.state
         fetch(`http://localhost:3000/login`, {
             method: "POST",
             headers: {
@@ -34,35 +26,32 @@ class Login extends Component {
              if (response.errors){
                  alert(response.errors)
              } else {
-              this.props.setToken(response)
-              this.props.history.push("/")
-              this.setState({
-                username: "",
-                password: ""    
-              })
+              props.setToken(response);
+              props.history.push("/");
+              setUsername("");
+              setPassword("");
              }
          })
        
     }
 
-    render() {
         return (
             <div className="login">
             <h1>Login</h1>
-            <form onSubmit={this.onSubmit}>
+            <form onSubmit={onSubmit}>
                 <label>
                  Name:
-                  <input onChange={this.onChange} type="text" name="username" value={this.state.username}/>
+                  <input onChange={e => setUsername(e.target.value)} type="text" name="username" value={username}/>
                 </label>
                 <label><br></br>
                  Password:
-                  <input onChange={this.onChange} type="password" name="password" value={this.state.password}/>
+                  <input onChange={e => setPassword(e.target.value)} type="password" name="password" value={password}/>
                 </label><br></br>
                   <input type="submit" value="Submit"/>
             </form>
             </div>
         );
-    }
+    
 }
 
 export default connect(null, {setToken})(Login);
