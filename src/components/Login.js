@@ -8,9 +8,9 @@ const Login = (props) => {
     const [password, setPassword] = useState("")
 
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault()
-        fetch(`http://localhost:3000/login`, {
+        const res = await fetch(`http://localhost:3000/login`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -21,19 +21,16 @@ const Login = (props) => {
                 password
              })
          })
-         .then(r => r.json())
-         .then(response =>{
-             if (response.errors){
-                 alert(response.errors)
+         const data = await res.json()
+             if (data.errors){
+                 alert(data.errors)
              } else {
-              props.setToken(response);
+              props.setToken(data);
               props.history.push("/");
               setUsername("");
               setPassword("");
              }
-         })
-       
-    }
+       }
 
         return (
             <div className="login">

@@ -22,3 +22,4 @@ const Review = ({review, userId, deleteReview}) => {
 }
 
 export default connect(null, { deleteReview })(Review);
+
