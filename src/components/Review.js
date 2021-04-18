@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { deleteReview } from '../redux/actionCreators'
 import Button from './Button'
-import { render } from '@testing-library/react';
+// import { render } from '@testing-library/react';
 
 const Review = ({review, userId, deleteReview}) => {
 

@@ -8,7 +8,7 @@ const Login = (props) => {
     const [password, setPassword] = useState("")
 
 
-    const onSubmit = async (e) => {
+    async function onSubmit(e){
         e.preventDefault()
         const res = await fetch(`http://localhost:3000/login`, {
             method: "POST",

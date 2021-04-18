@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReviewModalForm from './ReviewModalForm';
 import ReviewContainer from '../containers/ReviewContainer';
@@ -6,22 +5,26 @@ import NotFound from './NotFound'
 import { getYelpRestaurant, findBackEndRestaurant, clearRestaurantPage, openModal, closeModal } from '../redux/actionCreators';
 import Button from './Button';
 import Carousel from 'nuka-carousel';
+import { useEffect } from 'react';
 
-class RestaurantPage extends Component {
+const RestaurantPage = (props) => {
 
-    componentDidMount(){
-        this.props.getYelpRestaurant(this.props.match.params.id)
-        this.props.findBackEndRestaurant(this.props.match.params.id)
-    }
+    const { redirect, history, openModal,getYelpRestaurant, findBackEndRestaurant, clearRestaurantPage, closeModal, yelpRestaurant } = props
+    const { name, location, display_phone, photos} = yelpRestaurant;
 
-    componentWillUnmount(){
-        this.props.clearRestaurantPage()
-        this.props.closeModal()
-    }
 
-    render() {
-        const { redirect, history, openModal } = this.props
-        const { name, location, display_phone, photos} = this.props.yelpRestaurant
+    useEffect(() => {
+        getYelpRestaurant(props.match.params.id);
+        findBackEndRestaurant(props.match.params.id);
+
+        return function cleanup(){
+            clearRestaurantPage()
+            closeModal()
+        }
+
+    }, [props.match.params.id, getYelpRestaurant, clearRestaurantPage, closeModal, findBackEndRestaurant] )
+   
+     
         return (
             <div id="rest-page">
                 <ReviewModalForm/>
@@ -65,7 +68,7 @@ class RestaurantPage extends Component {
             </div>
         );
     }
-}
+
 
 const msp = state =>({
     yelpRestaurant: state.restaurants.yelpRestaurant,
