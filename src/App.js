@@ -21,8 +21,7 @@ class App extends Component {
       if (token){
         this.props.autoLogin(token)
       } 
-      document.addEventListener("keydown", this.easterEggGetttingCloser, false);
-      document.addEventListener("keyup", this.easterEggFurtherAway, false);
+
   }
 
   state = {
@@ -48,6 +47,8 @@ class App extends Component {
   }
 
   render(){
+    document.addEventListener("keydown", this.easterEggGetttingCloser, false);
+    document.addEventListener("keyup", this.easterEggFurtherAway, false);
     return (
       <div className="App">
           <NavBar history={this.props.history} />
